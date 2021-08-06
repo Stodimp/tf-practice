@@ -222,7 +222,7 @@ def plot_loss_curves(history):
     plt.legend()
 
 
-def compare_historys(original_history, new_history, initial_epochs=5):
+def compare_histories(original_history, new_history, initial_epochs=5):
     """
     Compares two TensorFlow model History objects.
 
@@ -247,25 +247,24 @@ def compare_historys(original_history, new_history, initial_epochs=5):
     total_val_loss = val_loss + new_history.history["val_loss"]
 
     # Make plots
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(8, 10))
     plt.subplot(2, 1, 1)
     plt.plot(total_acc, label="Training Accuracy")
     plt.plot(total_val_acc, label="Validation Accuracy")
-    plt.plot(
-        [initial_epochs - 1, initial_epochs - 1], plt.ylim(), label="Start Fine Tuning"
-    )  # reshift plot around epochs
+    plt.axvline(x=initial_epochs-1, label="Start Fine Tuning", c='g')
+    plt.ylabel("Accruacy")
     plt.legend(loc="lower right")
     plt.title("Training and Validation Accuracy")
 
     plt.subplot(2, 1, 2)
     plt.plot(total_loss, label="Training Loss")
     plt.plot(total_val_loss, label="Validation Loss")
-    plt.plot(
-        [initial_epochs - 1, initial_epochs - 1], plt.ylim(), label="Start Fine Tuning"
-    )  # reshift plot around epochs
+    plt.ylim([0, 1.0])
+    plt.axvline(x=initial_epochs-1, label="Start Fine Tuning", c='g') 
     plt.legend(loc="upper right")
     plt.title("Training and Validation Loss")
-    plt.xlabel("epoch")
+    plt.ylabel("Cross Entropy")
+    plt.xlabel("Epoch")
     plt.show()
 
 
