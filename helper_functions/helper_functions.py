@@ -207,7 +207,6 @@ def plot_loss_curves(history):
     plt.plot(epochs, loss, label="Training Loss")
     plt.plot(epochs, val_loss, label="Validation Loss")
     plt.ylabel("Cross Entropy")
-    plt.ylim([0, 1.0])
     plt.title("Training and Validation Loss")
     plt.xlabel("Epochs")
     plt.legend()
